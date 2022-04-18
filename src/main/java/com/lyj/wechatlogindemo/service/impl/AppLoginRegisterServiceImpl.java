@@ -7,7 +7,6 @@ import com.lyj.wechatlogindemo.dto.UserInfo;
 import com.lyj.wechatlogindemo.service.AppLoginRegisterService;
 import com.lyj.wechatlogindemo.utils.AuthUtil;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +23,10 @@ public class AppLoginRegisterServiceImpl implements AppLoginRegisterService {
      * @title weChatLogin
      * @description 微信授权登录
      *
-     *      步骤： 1、 通过appid + appSecret + code 访问微信开放平台的地址获取openid 和 access_token
+     *      编码前准备工作：在微信开放平台创建应用在审核通过后，获取appid 和 appSecret
+     *      步骤：
+     *            0、 由app端调起微信授权登录页面，让用户进行授权，用户授权后会返回一个code ，后端带着这个code去请求微信的接口获取数据
+     *            1、 通过appid + appSecret + code 访问微信开放平台的地址获取openid 和 access_token
      *            2、 通过access_token 和 openid 请求地址获取用户数据
      *            3、 使用openid查询用户表
      *                 a、若查到用户，直接给当前用户创建token，并登录
@@ -53,7 +55,6 @@ public class AppLoginRegisterServiceImpl implements AppLoginRegisterService {
                 //根据openid查询时候有用户信息
                 ResponseMemberDTO memberDTO = appCoreMemberMapper.getMemberInfoByOpenid(openid);
                 if (Objects.isNull(memberDTO)) {
-
 
                     //没有绑定用户请前往绑定
                     HashMap map = new HashMap();
