@@ -1,0 +1,13 @@
+package com.lyj.wechatlogindemo;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class WechatLoginDemoApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
