@@ -23,8 +23,14 @@ public class AppLoginRegisterServiceImpl implements AppLoginRegisterService {
      * @throws
      * @title weChatLogin
      * @description 微信授权登录
-     * @author Kuangzc
-     * @updateTime 2019-9-12 16:00:51
+     *
+     *      步骤： 1、 通过appid + appSecret + code 访问微信开放平台的地址获取openid 和 access_token
+     *            2、 通过access_token 和 openid 请求地址获取用户数据
+     *            3、 使用openid查询用户表
+     *                 a、若查到用户，直接给当前用户创建token，并登录
+     *                 b、未查到此用户，先注册用户基本信息（可跳过），创建token并登录
+     *            4、 放回用户登录基本信息和token
+     *
      */
     public Map<String, Object> weChatLogin(String code) {
         try {
