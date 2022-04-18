@@ -9,6 +9,7 @@ import com.lyj.wechatlogindemo.utils.AuthUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -38,6 +39,7 @@ public class AppLoginRegisterServiceImpl implements AppLoginRegisterService {
             JSONObject userInfo = AuthUtil.doGetJson(infoUrl);
 
             //成功获取授权,以下部分为业务逻辑处理了，根据个人业务需求写就可以了
+            // todo 业务逻辑伪代码
             if (userInfo != null && openid != null) {
                 String nickname = userInfo.getString("nickname");
                 String headimgurl = userInfo.getString("headimgurl");
@@ -45,6 +47,7 @@ public class AppLoginRegisterServiceImpl implements AppLoginRegisterService {
                 //根据openid查询时候有用户信息
                 ResponseMemberDTO memberDTO = appCoreMemberMapper.getMemberInfoByOpenid(openid);
                 if (Objects.isNull(memberDTO)) {
+
 
                     //没有绑定用户请前往绑定
                     HashMap map = new HashMap();
